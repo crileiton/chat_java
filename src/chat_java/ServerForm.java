@@ -5,6 +5,8 @@
  */
 package chat_java;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -26,6 +28,12 @@ public class ServerForm extends javax.swing.JFrame {
     ServerSocket server = null;
 
     /**
+     * Segunda guía
+     */
+    DataOutputStream dos = null;
+    DataInputStream dis = null;
+
+    /**
      * Creates new form ServerForm
      */
     public ServerForm() {
@@ -43,6 +51,10 @@ public class ServerForm extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_iniciar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_RecMsg = new javax.swing.JTextArea();
+        txt_msg = new javax.swing.JTextField();
+        btn_enviar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,21 +65,43 @@ public class ServerForm extends javax.swing.JFrame {
             }
         });
 
+        txt_RecMsg.setColumns(20);
+        txt_RecMsg.setRows(5);
+        jScrollPane1.setViewportView(txt_RecMsg);
+
+        btn_enviar.setText("Enviar");
+        btn_enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_enviarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(btn_iniciar)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_msg, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_iniciar))
+                .addGap(40, 40, 40)
+                .addComponent(btn_enviar)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(btn_iniciar)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_enviar))
+                .addGap(18, 18, 18)
+                .addComponent(txt_msg, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,12 +113,28 @@ public class ServerForm extends javax.swing.JFrame {
             server = new ServerSocket(6969);
             client = server.accept();
             JOptionPane.showMessageDialog(null, "Cliente Aceptado");
+            dos = new DataOutputStream(client.getOutputStream());
+            dis = new DataInputStream(client.getInputStream());
+            ReceiveMessage serverThread = new ReceiveMessage(dis, txt_RecMsg);
+            serverThread.setDaemon(true);
+            serverThread.setName("Cliente");
+            serverThread.start();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Cliente NO Disponible");
             Logger.getLogger(ServerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btn_iniciarActionPerformed
+
+    private void btn_enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarActionPerformed
+        // TODO add your handling code here:
+        String msg = txt_msg.getText();
+        try {
+            dos.writeUTF(msg);
+        } catch (IOException ex) {
+            Logger.getLogger(ServerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_enviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,6 +172,10 @@ public class ServerForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_enviar;
     private javax.swing.JButton btn_iniciar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txt_RecMsg;
+    private javax.swing.JTextField txt_msg;
     // End of variables declaration//GEN-END:variables
 }
