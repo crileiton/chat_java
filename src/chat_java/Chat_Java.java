@@ -12,10 +12,50 @@ package chat_java;
 public class Chat_Java {
 
     /**
+     * Atributos
+     */
+    private String nombre;
+
+    /**
+     *
+     */
+    public Chat_Java() {
+        this.nombre = null;
+    }
+
+    /**
+     *
+     */
+    public Chat_Java(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Metodo get
+     */
+    public String getNombre() {
+        return nombre;
+    }
+    
+    /**
+     * Metodo set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    /**
+     * Metodo toString
+     */
+    public String toString(){
+        return "Persona{" + "nombre=" + nombre + '}';
+    }
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
+
 }
