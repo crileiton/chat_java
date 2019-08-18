@@ -32,8 +32,7 @@ public class ReceiveMessage extends Thread {
                 msg = dis.readUTF();
                 txt_area.append("\n" + this.getName() + ":" + msg);
             } catch (IOException ex) {
-                Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null,
-                        ex);
+                Logger.getLogger(ReceiveMessage.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

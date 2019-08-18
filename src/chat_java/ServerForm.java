@@ -166,17 +166,23 @@ public class ServerForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         Chat_Servicio chat = new Chat_Servicio();
         Conexion con = new Conexion();
-        
+
         try {
-            String r = chat.recuperarPorNombre(con.obtener(), txt_nombre.getText().toString())+"";
-            txt_msg.setText(r);
+            Chat_Java respuesta = chat.recuperarPorNombre(con.obtener(), txt_nombre.getText().toString());
+
+            if (respuesta == null) {
+                txt_msg.setText("No existe el nombre");
+            } else {
+                txt_msg.setText(respuesta.getNombre());
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ServerForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     /**
@@ -213,6 +219,7 @@ public class ServerForm extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_buscar;

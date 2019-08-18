@@ -36,18 +36,18 @@ public class Chat_Java {
     public String getNombre() {
         return nombre;
     }
-    
+
     /**
      * Metodo set
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     /**
      * Metodo toString
      */
-    public String toString(){
+    public String toString() {
         return "Persona{" + "nombre=" + nombre + '}';
     }
 
@@ -56,6 +56,7 @@ public class Chat_Java {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+
     }
 
 }
