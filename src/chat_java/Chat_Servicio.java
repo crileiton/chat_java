@@ -23,11 +23,11 @@ public class Chat_Servicio {
     public Chat_Java recuperarPorNombre(Connection conexion, String nombre) throws SQLException {
         Chat_Java miChat = null;
         try {
-            PreparedStatement consulta = conexion.prepareStatement("SELECT nombre FROM " + this.tabla + " WHERE nombre = ?");
+            PreparedStatement consulta = conexion.prepareStatement("SELECT nombre, apellido FROM " + this.tabla + " WHERE nombre = ?");
             consulta.setString(1, nombre);
             ResultSet resultado = consulta.executeQuery();
             while (resultado.next()) {
-                miChat = new Chat_Java(resultado.getString("nombre"));
+                miChat = new Chat_Java(resultado.getString("nombre") + resultado.getString("apellido"));
             }
         } catch (SQLException ex) {
             throw new SQLException(ex);
@@ -35,13 +35,14 @@ public class Chat_Servicio {
         return miChat;
     }
 
-    public void guardar(Connection conexion, String nombre) throws SQLException {
+    public void guardar(Connection conexion, String nombre, String apellido) throws SQLException {
 
         try {
             PreparedStatement consulta;
             if (nombre != null || nombre != "" || nombre != " ") {
-                consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(nombre) VALUES(?)");
+                consulta = conexion.prepareStatement("INSERT INTO " + this.tabla + "(nombre, apellido) VALUES(?,?)");
                 consulta.setString(1, nombre);
+                consulta.setString(2, apellido);
                 consulta.executeUpdate();
             }
         } catch (SQLException ex) {

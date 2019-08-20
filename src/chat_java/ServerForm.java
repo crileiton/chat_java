@@ -69,6 +69,7 @@ public class ServerForm extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_base_datos = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        txt_apellido = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Servidor");
@@ -133,11 +134,13 @@ public class ServerForm extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btn_iniciar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(97, 97, 97)
-                        .addComponent(btn_enviar)
-                        .addGap(187, 187, 187)))
+                        .addComponent(btn_enviar)))
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
@@ -159,7 +162,8 @@ public class ServerForm extends javax.swing.JFrame {
                     .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_buscar)
                     .addComponent(btn_guardar)
-                    .addComponent(btn_eliminar))
+                    .addComponent(btn_eliminar)
+                    .addComponent(txt_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -240,8 +244,9 @@ public class ServerForm extends javax.swing.JFrame {
         Conexion con = new Conexion();
 
         try {
-            chat.guardar(con.obtener(), txt_nombre.getText());
+            chat.guardar(con.obtener(), txt_nombre.getText(), txt_apellido.getText());
             txt_nombre.setText(null);
+            txt_apellido.setText(null);
             txt_base_datos.setText(null);
             this.llenar();
             JOptionPane.showMessageDialog(null, "Nombre agregado a la base de datos.");
@@ -338,6 +343,7 @@ public class ServerForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea txt_RecMsg;
+    private javax.swing.JTextField txt_apellido;
     private javax.swing.JTextArea txt_base_datos;
     private javax.swing.JTextField txt_msg;
     private javax.swing.JTextField txt_nombre;

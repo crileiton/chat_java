@@ -15,12 +15,18 @@ public class Chat_Java {
      * Atributos
      */
     private String nombre;
+    
+    /**
+     * Atributos
+     */
+    private String apellido;
 
     /**
      *
      */
     public Chat_Java() {
         this.nombre = null;
+        this.apellido = null;
     }
 
     /**
@@ -28,6 +34,7 @@ public class Chat_Java {
      */
     public Chat_Java(String nombre) {
         this.nombre = nombre;
+        this.apellido = apellido;
     }
 
     /**
@@ -36,6 +43,13 @@ public class Chat_Java {
     public String getNombre() {
         return nombre;
     }
+    
+    /**
+     * Metodo get
+     */
+    public String getApellido() {
+        return apellido;
+    }
 
     /**
      * Metodo set
@@ -43,12 +57,19 @@ public class Chat_Java {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    /**
+     * Metodo set
+     */
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
     /**
      * Metodo toString
      */
     public String toString() {
-        return "Persona{" + "nombre=" + nombre + '}';
+        return "Persona{" + "nombre=" + nombre + "apellido="+apellido+"}";
     }
 
     /**
