@@ -5,21 +5,23 @@
  */
 package chat_java;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
  * @author crileiton
  */
-public class Conexion {
-
+public class ConexionCliente {
+    
     private static Connection cnx = null;
 
     public static Connection obtener() throws SQLException, ClassNotFoundException {
         if (cnx == null) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                cnx = DriverManager.getConnection("jdbc:mysql://localhost/chat_db", "root", "");
+                cnx = DriverManager.getConnection("jdbc:mysql://localhost/chat_db_2", "root", "");
             } catch (SQLException ex) {
                 throw new SQLException(ex);
             } catch (ClassNotFoundException ex) {
@@ -34,5 +36,5 @@ public class Conexion {
             cnx.close();
         }
     }
-
+    
 }
