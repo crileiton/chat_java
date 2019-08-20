@@ -56,6 +56,7 @@ public class ClientForm extends javax.swing.JFrame {
         btn_enviar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cliente");
 
         btn_conectar.setText("Connect");
         btn_conectar.addActionListener(new java.awt.event.ActionListener() {

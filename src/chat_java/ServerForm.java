@@ -71,6 +71,7 @@ public class ServerForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Servidor");
 
         btn_iniciar.setText("Start Server");
         btn_iniciar.addActionListener(new java.awt.event.ActionListener() {
